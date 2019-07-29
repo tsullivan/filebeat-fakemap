@@ -1,0 +1,38 @@
+{
+  "name": "filebeat_fakemap",
+  "version": "0.0.0",
+  "author": "Elastic",
+  "private": true,
+  "license": "Elastic-License",
+  "description": "This is a tools backend",
+  "main": "index.js",
+  "kibana": {
+    "version": "8.0.0",
+    "templateVersion": "1.0.0"
+  },
+  "scripts": {
+    "preinstall": "node ../../preinstall_check",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@elastic/eslint-config-kibana": "link:../../packages/eslint-config-kibana",
+    "@elastic/eslint-import-resolver-kibana": "link:../../packages/kbn-eslint-import-resolver-kibana",
+    "@kbn/expect": "link:../../packages/kbn-expect",
+    "@kbn/test": "link:../../packages/kbn-test",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^6.1.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.4.1",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-mocha": "^5.3.0",
+    "eslint-plugin-no-unsanitized": "^3.0.2",
+    "eslint-plugin-prefer-object-spread": "^1.2.1",
+    "eslint-plugin-react": "^7.12.4"
+  },
+  "dependencies": {
+    "rison": "^0.1.1"
+  }
+}
