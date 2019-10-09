@@ -6,11 +6,19 @@ import { registerRoutes } from './routes';
 export async function initPlugin(server: any): Promise<void> {
   const logger = new Logger(server);
   const { kbnServer } = server.plugins.xpack_main.status.plugin;
-  const { plugins: { task_manager: taskManager } } = server;
+  const {
+    plugins: { task_manager: taskManager },
+  } = server;
   const config = server.config();
   const { elasticsearch } = server.plugins;
   const { callWithRequest } = elasticsearch.getCluster('data');
-  const fakeReq = { headers: { authorization: config.get('filebeat_fakemap.ingestAuth') } };
+  const fakeReq = {
+    headers: {
+      authorization: `Basic ${
+        Buffer.from(config.get('filebeat_fakemap.ingestAuth')).toString('base64')
+      }`,
+    },
+  }; // prettier-ignore
   const callEs = callWithRequest.bind(null, fakeReq);
 
   logger.info('hello from fakemap plugin');
@@ -28,8 +36,7 @@ export async function initPlugin(server: any): Promise<void> {
         state: {},
       });
       logger.info(`Task was scheduled: ${task.id}`);
-
-    } catch(err) {
+    } catch (err) {
       logger.info('Task scheduling failed: ' + err);
     }
   });
