@@ -5,7 +5,7 @@ export interface ExampleData {
   destination: {
     bytes: number;
     packets: number;
-    geo: { city_name: string; country_iso_code: string; location: { lat: string; lon: string } };
+    geo: { city_name: string; country_iso_code: string; location: { lat: number; lon: number } };
     port: number;
     ip: string;
   };
@@ -24,7 +24,7 @@ export interface ExampleData {
   source: {
     bytes: number;
     packets: number;
-    geo: { city_name: string; country_iso_code: string; location: { lat: string; lon: string } };
+    geo: { city_name: string; country_iso_code: string; location: { lat: number; lon: number } };
     port: number;
     ip: string;
   };
