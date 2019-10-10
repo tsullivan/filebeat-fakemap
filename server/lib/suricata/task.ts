@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { get as getGuarded } from 'lodash';
 import {
   RunContext,
@@ -35,18 +36,12 @@ export const fakeSuricataIngestTask = (callEs: any, logger: Logger): { [type: st
               },
             });
 
-            const nextDateObj = new Date(currentRunDate.valueOf() + 60000); // calculate 1min from when the task was supposed to run
+            const nextMo = moment(currentRunDate).add('minute', 1);
             const taskRuns = getGuarded(taskState, 'stats.runs', 0);
 
-            logger.info(
-              `indexed fake data: ${JSON.stringify({
-                timestamp: timestampNow,
-                nextRun: nextDateObj.toISOString(),
-                taskState,
-              })}`
-            );
+            logger.info(`Indexed a Suricata event. Next run: ${nextMo.toISOString()}`);
 
-            return { state: { stats: { runs: taskRuns + 1 } }, runAt: nextDateObj };
+            return { state: { stats: { runs: taskRuns + 1 } }, runAt: new Date(nextMo.valueOf()) };
           },
           async cancel(): Promise<void> {
             throw new Error("Can't cancel!");
